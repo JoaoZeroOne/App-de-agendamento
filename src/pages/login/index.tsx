@@ -18,30 +18,23 @@ import { Input } from "../../components/Input";
 export default function Login() {
     const [email, setEmail] = useState('');
     const [passorwd, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(true);
     const [loading, setLoading] = useState(false)
 
-    function getLogin() {
+    async function getLogin() {
+        setLoading(true)
         try {
-            setLoading(true)
 
             if (!email || !passorwd) {
                 return Alert.alert('Atenção', 'Informe os campos obrigatórios!')
             }
 
-            setTimeout(() => {
-                if (email == 'Joao' && passorwd == '1234') {
-                    Alert.alert('Logado com sucesso!')
-                } else {
-                    Alert.alert('Email ou senha incorreto')
-                }
-
-                setLoading(false)
-            }, 3000)
-
+            console.log('LOGOU!')
 
         } catch (error) {
             console.log(error)
         }
+        setLoading(false)
     }
     return (
         <View style={style.container}>
@@ -57,38 +50,7 @@ export default function Login() {
             <View style={style.boxMid}>
                 <Input
                     title="ENDEREÇO DE E-MAIL"
-                    IconRigth={MaterialIcons}
-                    iconRightName="email"
                 />
-                {/* <Text style={style.titleInput}>ENDEREÇO DE E-MAIL</Text>
-                <View style={style.BoxInput}>
-                    <TextInput
-                        style={style.input}
-                        value={email}
-                        onChangeText={setEmail}
-                    />
-                    <MaterialIcons
-                        name='email'
-                        size={20}
-                        color={themas.colors.gray}
-                    />
-
-                </View>
-
-                <Text style={style.titleInput}>SENHA</Text>
-                <View style={style.BoxInput}>
-                    <TextInput
-                        style={style.input}
-                        value={passorwd}
-                        onChangeText={setPassword}
-                    />
-                    <MaterialIcons
-                        name='remove-red-eye'
-                        size={20}
-                        color={themas.colors.gray}
-                    />
-
-                </View> */}
             </View>
 
             <View style={style.boxBottom}>

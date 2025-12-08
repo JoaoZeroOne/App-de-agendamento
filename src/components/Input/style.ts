@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { themas } from '../../global/themes';
 
 export const style = StyleSheet.create({
-    BoxInput: {
+    boxInput: {
         width: '100%',
         height: 40,
         borderWidth: 1,
