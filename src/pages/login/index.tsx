@@ -49,7 +49,20 @@ export default function Login() {
 
             <View style={style.boxMid}>
                 <Input
+                    value={email}
+                    onChangeText={setEmail}
                     title="ENDEREÇO DE E-MAIL"
+                    IconRigth={MaterialIcons}
+                    iconRightName="email"
+                />
+                <Input
+                    value={passorwd}
+                    onChangeText={setPassword}
+                    title="Senha"
+                    IconRigth={Octicons}
+                    iconRightName={showPassword ? "eye-closed" : "eye"}
+                    secureTextEntry={showPassword}
+                    onIconRigthPress={() => setShowPassword(!showPassword)}
                 />
             </View>
 

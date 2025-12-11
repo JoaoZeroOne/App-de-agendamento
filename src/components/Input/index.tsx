@@ -2,7 +2,7 @@ import React, { forwardRef, Fragment, LegacyRef } from "react";
 
 import { View, Text, TextInput, TextInputProps, TouchableOpacity } from 'react-native';
 import { FontAwesome, MaterialIcons, Octicons } from "@expo/vector-icons";
-import { style } from "./style";
+import { style } from "./styles";
 import { themas } from "../../global/themes";
 
 type IconComponent = React.ComponentType<React.ComponentProps<typeof MaterialIcons>> |
@@ -24,25 +24,46 @@ export const Input = forwardRef((Props: Props, ref: LegacyRef<TextInput> | null)
 
     const { IconLeft, IconRigth, iconLeftName, iconRightName, title, onIconLeftPress, onIconRigthPress, ...rest } = Props
 
+    const calculateSizeWidth = () =>{
+        if(IconLeft && IconRigth){
+            return '80%'
+        }else if(IconLeft || IconRigth){
+            return '90%'
+        }else{
+            return '100%'
+        }
+    }
+
+    const calculateSizePaddingLaft = () =>{
+        if(IconLeft && IconRigth){
+            return 0;
+        }else if(IconLeft || IconRigth){
+            return 10;
+        }else{
+            return 20;
+        }
+    };
+
     return (
         <Fragment>
-            <Text style={style.titleInput}>{title}</Text>
-            <View style={style.boxInput}>
+            {title&&<Text style={style.titleInput}>{title}</Text>}
+            <View style={[style.boxInput,{paddingLeft: calculateSizePaddingLaft()}]}>
                 {IconLeft && iconLeftName && (
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={onIconLeftPress} style={style.Button}>
                         <IconLeft name={iconLeftName as any} size={20} color={themas.colors.gray} style={style.Icon} />
                     </TouchableOpacity>
-
                 )}
                 <TextInput
-                    style={style.input}
+                    style={[
+                        style.input,{width:calculateSizeWidth()}
+                    ]}
+                    {...rest}
                 />
-                <MaterialIcons
-                    name="email"
-                    size={20}
-                    color={themas.colors.gray}
-
-                />
+                {IconRigth && iconRightName && (
+                    <TouchableOpacity onPress={onIconRigthPress} style={style.Button}>
+                        <IconRigth name={iconRightName as any} size={20} color={themas.colors.gray} style={style.Icon} />
+                    </TouchableOpacity>
+                )}
 
             </View>
         </Fragment>
